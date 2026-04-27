@@ -1,0 +1,258 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #020602;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+.app {
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  background:
+    radial-gradient(circle at top left, rgba(57, 255, 20, 0.18), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(0, 225, 255, 0.14), transparent 35%),
+    linear-gradient(135deg, #020602, #061406 55%, #000);
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(#39ff14 1px, transparent 1px),
+    radial-gradient(#64f6ff 1px, transparent 1px);
+  background-size: 80px 80px, 130px 130px;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.glow {
+  position: fixed;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.glow-one {
+  background: #39ff14;
+  top: 15%;
+  left: -80px;
+}
+
+.glow-two {
+  background: #00eaff;
+  right: -90px;
+  bottom: 10%;
+}
+
+.navbar {
+  width: min(1150px, 92%);
+  margin: 0 auto;
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+}
+
+.brand {
+  color: #b9ff90;
+  font-weight: 900;
+  font-size: 1.2rem;
+  text-shadow: 0 0 12px #39ff14;
+}
+
+.navBtn,
+.mainBtn,
+.ghostBtn {
+  border-radius: 999px;
+  font-weight: 900;
+}
+
+.navBtn {
+  color: #061406;
+  background: #39ff14;
+  padding: 12px 18px;
+  box-shadow: 0 0 20px rgba(57, 255, 20, 0.5);
+}
+
+.hero {
+  width: min(1150px, 92%);
+  margin: 30px auto 0;
+  min-height: 72vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.badge {
+  display: inline-block;
+  color: #39ff14;
+  border: 1px solid rgba(57, 255, 20, 0.5);
+  background: rgba(57, 255, 20, 0.08);
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+h1 {
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  line-height: 0.95;
+  margin: 20px 0;
+  text-transform: uppercase;
+}
+
+h1 span {
+  color: #39ff14;
+  text-shadow: 0 0 25px #39ff14;
+}
+
+.sub {
+  color: #d5ffd0;
+  font-size: 1.2rem;
+  max-width: 560px;
+  line-height: 1.6;
+}
+
+.buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.mainBtn {
+  background: linear-gradient(135deg, #39ff14, #baff66);
+  color: #041204;
+  padding: 15px 24px;
+  box-shadow: 0 0 25px rgba(57, 255, 20, 0.55);
+}
+
+.ghostBtn {
+  color: #b9ff90;
+  border: 1px solid rgba(57, 255, 20, 0.5);
+  padding: 15px 24px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.imageWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageWrap img {
+  width: min(520px, 100%);
+  border-radius: 50%;
+  background: #000;
+  box-shadow:
+    0 0 35px rgba(57, 255, 20, 0.45),
+    0 0 80px rgba(0, 234, 255, 0.18);
+  animation: float 4s ease-in-out infinite;
+}
+
+.cards {
+  width: min(1150px, 92%);
+  margin: 40px auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  position: relative;
+  z-index: 2;
+}
+
+.card,
+.buy {
+  background: rgba(0, 0, 0, 0.58);
+  border: 1px solid rgba(57, 255, 20, 0.28);
+  border-radius: 24px;
+  padding: 26px;
+  box-shadow: 0 0 30px rgba(57, 255, 20, 0.08);
+}
+
+.card h3 {
+  color: #39ff14;
+  margin-top: 0;
+}
+
+.card p {
+  color: #e6ffe0;
+  font-size: 1.1rem;
+}
+
+.buy {
+  width: min(760px, 92%);
+  margin: 50px auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.buy h2 {
+  font-size: 2.5rem;
+  margin: 0 0 10px;
+  color: #39ff14;
+}
+
+.buy p {
+  color: #d5ffd0;
+  margin-bottom: 28px;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #9cff8a;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@media (max-width: 800px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .buttons {
+    justify-content: center;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .navbar {
+    gap: 12px;
+  }
+
+  .navBtn {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+}
