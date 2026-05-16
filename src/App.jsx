@@ -5,10 +5,10 @@ import "./App.css";
 const X_URL = "https://x.com/AlienCashAC";
 
 // paste your real contract address here after launch
-const TOKEN_CA = "PASTE_CA_HERE";
+const TOKEN_CA = "update";
 
 // paste your pump.fun token link here after launch
-const PUMP_URL = "https://pump.fun/PASTE_CA_HERE";
+const PUMP_URL = "https://pump.fun/update";
 
 export default function App() {
   const [marketCap, setMarketCap] = useState("Loading...");
@@ -16,7 +16,7 @@ export default function App() {
 
   useEffect(() => {
     async function getMarketCap() {
-      if (TOKEN_CA === "PASTE_CA_HERE") {
+      if (TOKEN_CA === "update") {
         setMarketCap("CA coming soon");
         return;
       }
