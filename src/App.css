@@ -74,9 +74,16 @@ a {
   text-shadow: 0 0 12px #39ff14;
 }
 
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .navBtn,
 .mainBtn,
-.ghostBtn {
+.ghostBtn,
+.ghostSmall {
   border-radius: 999px;
   font-weight: 900;
 }
@@ -86,6 +93,13 @@ a {
   background: #39ff14;
   padding: 12px 18px;
   box-shadow: 0 0 20px rgba(57, 255, 20, 0.5);
+}
+
+.ghostSmall {
+  color: #b9ff90;
+  border: 1px solid rgba(57, 255, 20, 0.45);
+  padding: 11px 16px;
+  background: rgba(0, 0, 0, 0.35);
 }
 
 .hero {
@@ -215,6 +229,34 @@ h1 span {
   margin-bottom: 28px;
 }
 
+.mcBox {
+  margin: 18px auto 28px;
+  width: min(420px, 100%);
+  padding: 20px;
+  border-radius: 22px;
+  background: rgba(57, 255, 20, 0.08);
+  border: 1px solid rgba(57, 255, 20, 0.35);
+  box-shadow: 0 0 30px rgba(57, 255, 20, 0.12);
+  display: grid;
+  gap: 8px;
+}
+
+.mcBox span {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #39ff14;
+  text-shadow: 0 0 18px rgba(57, 255, 20, 0.65);
+}
+
+.mcBox small {
+  color: #d5ffd0;
+  word-break: break-all;
+}
+
+.centerButtons {
+  justify-content: center;
+}
+
 footer {
   text-align: center;
   padding: 30px;
@@ -253,6 +295,15 @@ footer {
 
   .navBtn {
     padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+
+  .navLinks {
+    gap: 8px;
+  }
+
+  .ghostSmall {
+    padding: 10px 13px;
     font-size: 0.9rem;
   }
 }

@@ -1,8 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import "./App.css";
 
+const X_URL = "https://x.com/AlienCashAC";
+
+// paste your real contract address here after launch
+const TOKEN_CA = "PASTE_CA_HERE";
+
+// paste your pump.fun token link here after launch
+const PUMP_URL = "https://pump.fun/PASTE_CA_HERE";
+
 export default function App() {
+  const [marketCap, setMarketCap] = useState("Loading...");
+  const [price, setPrice] = useState("");
+
+  useEffect(() => {
+    async function getMarketCap() {
+      if (TOKEN_CA === "PASTE_CA_HERE") {
+        setMarketCap("CA coming soon");
+        return;
+      }
+
+      try {
+        const res = await fetch(
+          `https://api.dexscreener.com/token-pairs/v1/solana/${TOKEN_CA}`
+        );
+        const data = await res.json();
+        const bestPair = data?.[0];
+
+        if (!bestPair) {
+          setMarketCap("Not live yet");
+          return;
+        }
+
+        setMarketCap(
+          bestPair.marketCap
+            ? `$${Number(bestPair.marketCap).toLocaleString()}`
+            : "Market cap loading"
+        );
+
+        setPrice(
+          bestPair.priceUsd
+            ? `$${Number(bestPair.priceUsd).toFixed(8)}`
+            : ""
+        );
+      } catch {
+        setMarketCap("Market cap unavailable");
+      }
+    }
+
+    getMarketCap();
+    const timer = setInterval(getMarketCap, 30000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="app">
       <div className="stars"></div>
@@ -11,7 +62,15 @@ export default function App() {
 
       <nav className="navbar">
         <div className="brand">👽 Alien Cash</div>
-        <a className="navBtn" href="#buy">Launch on Pump</a>
+
+        <div className="navLinks">
+          <a className="ghostSmall" href={X_URL} target="_blank" rel="noreferrer">
+            X
+          </a>
+          <a className="navBtn" href={PUMP_URL} target="_blank" rel="noreferrer">
+            Launch on Pump
+          </a>
+        </div>
       </nav>
 
       <main className="hero">
@@ -29,12 +88,13 @@ export default function App() {
           </h1>
 
           <p className="sub">
-            The chillest alien meme coin in the galaxy. Cold air, green cash,
-            and zero panic.
+            The chillest alien coin in the galaxy. Cold air, green cash,and zero panic.
           </p>
 
           <div className="buttons">
-            <a href="#buy" className="mainBtn">Enter the AC Room</a>
+            <a href={PUMP_URL} target="_blank" rel="noreferrer" className="mainBtn">
+              Enter the AC Room
+            </a>
             <a href="#tokenomics" className="ghostBtn">Tokenomics</a>
           </div>
         </motion.div>
@@ -64,11 +124,23 @@ export default function App() {
       </section>
 
       <section className="buy" id="buy">
-        <h2>Ready for Pump?</h2>
-        <p>Drop your link after launch.</p>
-        <a className="mainBtn" href="#" onClick={(e) => e.preventDefault()}>
-          Pump.fun Coming Soon
-        </a>
+        <h2>Live AC Room</h2>
+        <p>Current Market Cap</p>
+
+        <div className="mcBox">
+          <span>{marketCap}</span>
+          {price && <small>Price: {price}</small>}
+          <small>CA: {TOKEN_CA}</small>
+        </div>
+
+        <div className="buttons centerButtons">
+          <a className="mainBtn" href={PUMP_URL} target="_blank" rel="noreferrer">
+            Buy on Pump.fun
+          </a>
+          <a className="ghostBtn" href={X_URL} target="_blank" rel="noreferrer">
+            Follow X
+          </a>
+        </div>
       </section>
 
       <footer>Made in the AC Room 👽💸</footer>
