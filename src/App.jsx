@@ -17,7 +17,7 @@ export default function App() {
     async function getMarketCap() {
       try {
         const res = await fetch(
-          `https://api.dexscreener.com/token-pairs/v1/solana/${TOKEN_CA}`
+          `https://api.dexscreener.com/token-pairs/v1/solana/G2cgQKqjJ7cco71P1bEzY2WFHm8ioqM83e7RwYrBpump`
         );
 
         const data = await res.json();
