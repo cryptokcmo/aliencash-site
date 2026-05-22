@@ -10,7 +10,7 @@ const PUMP_URL =
   "https://pump.fun/G2cgQKqjJ7cco71P1bEzY2WFHm8ioqM83e7RwYrBpump";
 
 export default function App() {
-  const [marketCap, setMarketCap] = useState("Loading...");
+  const [marketCap, setMarketCap] = useState("G2cgQKqjJ7cco71P1bEzY2WFHm8ioqM83e7RwYrBpump");
   const [price, setPrice] = useState("");
 
   useEffect(() => {
