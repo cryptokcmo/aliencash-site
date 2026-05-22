@@ -9,36 +9,50 @@ const TOKEN_CA = "G2cgQKqjJ7cco71P1bEzY2WFHm8ioqM83e7RwYrBpump";
 const PUMP_URL =
   "https://pump.fun/G2cgQKqjJ7cco71P1bEzY2WFHm8ioqM83e7RwYrBpump";
 
+const DEX_URL =
+  "https://dexscreener.com/solana/G2cgQKqjJ7cco71P1bEzY2WFHm8ioqM83e7RwYrBpump";
+
 export default function App() {
-  const [marketCap, setMarketCap] = useState("G2cgQKqjJ7cco71P1bEzY2WFHm8ioqM83e7RwYrBpump");
+  const [marketCap, setMarketCap] = useState("Loading...");
   const [price, setPrice] = useState("");
+  const [dexLink, setDexLink] = useState(DEX_URL);
 
   useEffect(() => {
     async function getMarketCap() {
       try {
         const res = await fetch(
-          `https://api.dexscreener.com/token-pairs/v1/solana/G2cgQKqjJ7cco71P1bEzY2WFHm8ioqM83e7RwYrBpump`
+          `https://api.dexscreener.com/latest/dex/tokens/${TOKEN_CA}`
         );
 
         const data = await res.json();
-        const bestPair = data?.[0];
+        const pairs = data?.pairs || [];
 
-        if (!bestPair) {
-          setMarketCap("Not live yet");
+        if (!pairs.length) {
+          setMarketCap("Indexing...");
+          setPrice("");
           return;
         }
 
+        const bestPair =
+          pairs.find((pair) => pair.chainId === "solana") || pairs[0];
+
+        const cap = bestPair.marketCap || bestPair.fdv;
+
         setMarketCap(
-          bestPair.marketCap
-            ? `$${Number(bestPair.marketCap).toLocaleString()}`
-            : "Market cap loading"
+          cap ? `$${Number(cap).toLocaleString()}` : "Market cap loading"
         );
 
         setPrice(
           bestPair.priceUsd ? `$${Number(bestPair.priceUsd).toFixed(8)}` : ""
         );
-      } catch {
+
+        if (bestPair.url) {
+          setDexLink(bestPair.url);
+        }
+      } catch (error) {
+        console.error("Market cap error:", error);
         setMarketCap("Market cap unavailable");
+        setPrice("");
       }
     }
 
@@ -63,7 +77,7 @@ export default function App() {
           </a>
 
           <a className="navBtn" href={PUMP_URL} target="_blank" rel="noreferrer">
-            Launch on Pump
+            Buy on Pump
           </a>
         </div>
       </nav>
@@ -144,6 +158,10 @@ export default function App() {
         <div className="buttons centerButtons">
           <a className="mainBtn" href={PUMP_URL} target="_blank" rel="noreferrer">
             Buy on Pump.fun
+          </a>
+
+          <a className="ghostBtn" href={dexLink} target="_blank" rel="noreferrer">
+            View Chart
           </a>
 
           <a className="ghostBtn" href={X_URL} target="_blank" rel="noreferrer">
